@@ -14,8 +14,6 @@ class Server
 
     protected $fds;
 
-    protected $https;
-
     protected $clients;
 
     /**
@@ -71,6 +69,7 @@ class Server
         if (PHP_OS !== 'Darwin') {
             swoole_set_process_name("php {$this->servName}: master");
         }
+
 
         $ipList = swoole_get_local_ip();
         $ipList = implode(", ", $ipList);
@@ -265,7 +264,6 @@ class Server
     {   
         if (isset($this->fds[$fd])) {
             unset($this->fds[$fd]);
-            unset($this->https[$fd]);
             unset($this->clients[$fd]);
         }
     }
